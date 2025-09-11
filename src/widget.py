@@ -1,4 +1,4 @@
-from masks import get_mask_account, get_mask_card_number
+from src.masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(number_card_or_account: str) -> str:
@@ -12,10 +12,10 @@ def mask_account_card(number_card_or_account: str) -> str:
         elif symbol.isalpha():
             letter += symbol
 
-        if len(number) == 16:
-            return letter + " " + get_mask_card_number(number)
-        else:
-            return letter + " " + get_mask_account(number)
+    if len(number) == 16:
+        return letter + " " + get_mask_card_number(number)
+    else:
+        return letter + " " + get_mask_account(number)
 
 
 def get_date(str_date: str) -> str:
