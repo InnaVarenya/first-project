@@ -2,8 +2,12 @@ def filter_by_state(items: list[dict], state: str = "EXECUTED") -> list[dict]:
     """Функция, возвращающая список словарей, в которых ключ 'state' = 'EXECUTED'"""
     executed_item = []
     for item in items:
-        if item["state"] == state:
+        if item.get("state") == state:
             executed_item.append(item)
+
+        if not executed_item:
+            return []
+
     return executed_item
 
 

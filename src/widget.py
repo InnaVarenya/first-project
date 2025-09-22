@@ -9,18 +9,22 @@ def mask_account_card(number_card_or_account: str) -> str:
     for symbol in number_card_or_account:
         if symbol.isdigit():
             number += symbol
-        elif symbol.isalpha():
+        elif symbol.isalpha() or symbol == " ":
             letter += symbol
 
     if len(number) == 16:
-        return letter + " " + get_mask_card_number(number)
+        return letter + get_mask_card_number(number)
     else:
-        return letter + " " + get_mask_account(number)
+        return letter + get_mask_account(number)
 
 
 def get_date(str_date: str) -> str:
     """Функция, форматирующая дату в корректный формат"""
-    dd = str_date[8:10]
-    mm = str_date[5:7]
-    gggg = str_date[0:4]
-    return f"{dd}.{mm}.{gggg}"
+    if str_date and len(str_date) >= 10 and str_date[4] == '-' and str_date[7] == '-':
+        dd = str_date[8:10]
+        mm = str_date[5:7]
+        gggg = str_date[0:4]
+
+        if dd.isdigit() and mm.isdigit() and gggg.isdigit():
+            return f"{dd}.{mm}.{gggg}"
+    return "Некорректный формат даты"
