@@ -8,7 +8,7 @@ def data_fin_transactions(file_path: str) -> List[Dict[str, Any]]:
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             data = json.load(f)
-            if type(data) == list:
+            if isinstance(data, list):
                 return data
             else:
                 return []
